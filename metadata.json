@@ -1,0 +1,12 @@
+{
+  "name": "not alone",
+  "description": "A premium AI-powered dating mobile experience featuring smart matching, real-time chat, and an AI dating assistant.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

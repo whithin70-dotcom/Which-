@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A member of the Not Alone dating app.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "photoURLs": { "type": "array", "items": { "type": "string" } },
+        "bio": { "type": "string" },
+        "gender": { "type": "string", "enum": ["male", "female", "other"] },
+        "birthday": { "type": "string", "format": "date" },
+        "occupation": { "type": "string" },
+        "interests": { "type": "array", "items": { "type": "string" } },
+        "location": { "type": "object" },
+        "isPremium": { "type": "boolean" },
+        "isVerified": { "type": "boolean" },
+        "isAdmin": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Swipe": {
+      "title": "Swipe",
+      "description": "A swipe interaction between users.",
+      "type": "object",
+      "properties": {
+        "fromUid": { "type": "string" },
+        "toUid": { "type": "string" },
+        "type": { "type": "string", "enum": ["like", "nope", "superlike"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fromUid", "toUid", "type"]
+    },
+    "Match": {
+      "title": "Match",
+      "description": "A mutual like that creates a connection.",
+      "type": "object",
+      "properties": {
+        "users": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastMessage": { "type": "string" },
+        "lastMessageAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A chat message within a match.",
+      "type": "object",
+      "properties": {
+        "senderId": { "type": "string" },
+        "text": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "read": { "type": "boolean" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data."
+    },
+    "/swipes/{swipeId}": {
+      "schema": "Swipe",
+      "description": "Record of swipes to detect matches."
+    },
+    "/matches/{matchId}": {
+      "schema": "Match",
+      "description": "Active matches between users."
+    },
+    "/matches/{matchId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages for a specific match."
+    }
+  }
+}
